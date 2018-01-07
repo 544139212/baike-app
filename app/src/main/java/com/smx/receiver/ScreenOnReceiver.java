@@ -1,0 +1,20 @@
+package com.smx.receiver;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+import com.smx.util.ServiceUtil;
+
+public class ScreenOnReceiver extends BroadcastReceiver {
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+//			Toast.makeText(context, "屏幕亮起", Toast.LENGTH_SHORT).show();
+			ServiceUtil.startService(context);
+		}
+	}
+
+}

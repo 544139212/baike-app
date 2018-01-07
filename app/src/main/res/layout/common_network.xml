@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_network"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/pink_F4CCD5"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawableRight="@mipmap/arrow_right"
+        android:drawablePadding="10dp"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        android:alpha="0.15"
+        android:text="无网络服务，请检查网络连接"
+        android:textSize="12sp"
+        android:textColor="#ff2a271e"
+        android:visibility="gone"/>
+
+</LinearLayout>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.smx.SettingsActivity">
+
+    <include
+        android:id="@+id/common_header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/common_header_bar"
+        android:padding="@dimen/fab_margin"
+        android:orientation="vertical">
+        <!-- 图像|状态 -->
+        <RelativeLayout
+            android:id="@+id/accountSetting"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/pink_F4CCD5"
+            android:clickable="true"
+            android:focusable="true" >
+
+            <FrameLayout
+                android:id="@+id/frameLayout1"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp" >
+
+                <ImageView
+                    android:id="@+id/face"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher_round" />
+
+                <ImageView
+                    android:id="@+id/statusIcon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom|right|center"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/nick"
+                style="@style/H3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="69dp"
+                android:layout_toRightOf="@id/frameLayout1"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/status"
+                style="@style/H3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/nick"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/imageView1"
+                android:text="在线"
+                android:duplicateParentState="true" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@mipmap/arrow_right" />
+        </RelativeLayout>
+
+        <!-- 个人资料 -->
+        <TextView
+            android:id="@+id/my_profile"
+            style="@style/H3"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/pink_F4CCD5"
+            android:clickable="true"
+            android:drawableRight="@mipmap/arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="账号资料" />
+
+
+        <!-- 账号安全 -->
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/pink_F4CCD5"
+            android:clickable="true"
+            android:drawableRight="@mipmap/arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="测试数据"
+            style="@style/H3"/>
+
+        <!-- 反馈 -->
+        <RelativeLayout
+            android:id="@+id/set_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/pink_F4CCD5"
+            android:clickable="true"
+            android:focusable="true" >
+
+            <TextView
+                style="@style/H3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="反馈" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:duplicateParentState="true"
+                android:src="@mipmap/arrow_right" />
+        </RelativeLayout>
+
+        <!-- 关于 -->
+        <RelativeLayout
+            android:id="@+id/layout_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/pink_F4CCD5"
+            android:clickable="true"
+            android:focusable="true" >
+
+            <TextView
+                style="@style/H3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="关于我们" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:duplicateParentState="true"
+                android:src="@mipmap/arrow_right" />
+        </RelativeLayout>
+
+        <!-- 退出 -->
+        <Button
+            android:id="@+id/btnExit"
+            style="@style/RedGreen"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/pink_FF8894"
+            android:text="退出当前账号" />
+    </LinearLayout>
+
+</RelativeLayout>

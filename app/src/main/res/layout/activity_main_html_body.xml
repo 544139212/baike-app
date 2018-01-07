@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.smx.MainActivity"
+    tools:showIn="@layout/activity_main_html">
+
+    <include
+        android:id="@+id/common_header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_1"/>
+
+    <FrameLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/common_footer_bar"
+        android:layout_below="@+id/common_header_bar"/>
+
+    <LinearLayout
+        android:id="@+id/common_footer_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#fcfcfc"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/rb_clip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewButtonStyle"
+            android:drawableTop="@drawable/clip_tv_selector"
+            android:text="影视"/>
+
+        <TextView
+            android:id="@+id/rb_index"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewButtonStyle"
+            android:drawableTop="@drawable/index_tv_selector"
+            android:text="主页"/>
+
+        <TextView
+            android:id="@+id/rb_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewButtonStyle"
+            android:drawableTop="@drawable/song_tv_selector"
+            android:text="金曲"/>
+    </LinearLayout>
+
+</RelativeLayout>

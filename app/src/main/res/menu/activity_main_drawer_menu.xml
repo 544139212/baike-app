@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_photo"
+            android:icon="@mipmap/acc_account"
+            android:title="个人资料" />
+    </group>
+
+    <item android:title="分享与设定">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@mipmap/share"
+                android:title="分享" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@mipmap/settings"
+                android:title="设定" />
+        </menu>
+    </item>
+
+</menu>
