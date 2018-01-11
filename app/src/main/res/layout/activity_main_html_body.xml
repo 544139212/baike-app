@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="#fcfcfc"
+        android:background="@drawable/border_top_shape"
         android:gravity="center">
         <TextView
             android:id="@+id/rb_clip"
