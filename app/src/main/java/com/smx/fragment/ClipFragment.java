@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
 import com.smx.adapter.ClipAdapter;
-import com.smx.dto.LinkListWsDTO;
 import com.smx.dto.LinkListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;

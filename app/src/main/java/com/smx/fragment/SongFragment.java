@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
 import com.smx.adapter.SongAdapter;
 import com.smx.dto.LinkListRespWsDTO;
-import com.smx.dto.LinkListWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 

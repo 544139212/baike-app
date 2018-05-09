@@ -19,12 +19,14 @@
         android:padding="@dimen/fab_margin"
         android:orientation="vertical">
         <EditText
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:hint="标题"
+            android:hint="事项"
             android:maxLines="1"
-            style="@style/H1_2"/>
+            android:maxLength="20"
+            style="@style/H2_2"/>
 
         <View
             android:layout_width="match_parent"
@@ -34,12 +36,15 @@
             android:layout_marginBottom="10dp"/>
 
         <EditText
+            android:id="@+id/et_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:hint="正文"
-            android:gravity="top"
-            style="@style/H2_2"/>
+            android:hint="金额"
+            android:maxLines="1"
+            android:maxLength="20"
+            style="@style/H2_2"
+            android:gravity="top"/>
     </LinearLayout>
 
 </RelativeLayout>

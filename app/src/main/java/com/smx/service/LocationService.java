@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smx.Configuration;
+import com.smx.dto.ResultDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -166,7 +167,6 @@ public class LocationService extends Service {
             e.printStackTrace();
         }
 
-        final Context context = this;
         OkHttpUtils.post().url(Configuration.ws_url + "/location/add")
                 .addParams("longitude", String.valueOf(location.getLongitude()))
                 .addParams("latitude", String.valueOf(location.getLatitude()))
@@ -182,10 +182,10 @@ public class LocationService extends Service {
                 .addParams("addressLine10", addressLines[9])
                 .addParams("createTime", "2010-07-09 01:56:21")
                 .addParams("createBy", "wh@aishk.com")
-                .build().execute(new Callback<String>() {
+                .build().execute(new Callback<ResultDTO>() {
             @Override
-            public String parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), String.class);
+            public ResultDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), ResultDTO.class);
             }
 
             @Override
@@ -194,8 +194,10 @@ public class LocationService extends Service {
             }
 
             @Override
-            public void onResponse(String o, int i) {
+            public void onResponse(ResultDTO o, int i) {
+                if (o.getCode() == 200) {
 
+                }
             }
         });
     }

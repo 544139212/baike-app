@@ -72,6 +72,7 @@
         <activity android:name=".CreateActivity" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".BillActivity" />
 
         <!-- push富媒体，使用富媒体推送必须声明 -->
         <activity
