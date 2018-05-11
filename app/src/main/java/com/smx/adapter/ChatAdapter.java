@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smx.R;
-import com.smx.dto.LocationWsDTO;
+import com.smx.dto.BillListWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -35,9 +35,9 @@ import butterknife.ButterKnife;
 public class ChatAdapter extends BaseAdapter {
 
     Context context;
-    List<LocationWsDTO> objects;
+    List<BillListWsDTO> objects;
 
-    public ChatAdapter(@NonNull Context context, @NonNull List<LocationWsDTO> objects) {
+    public ChatAdapter(@NonNull Context context, @NonNull List<BillListWsDTO> objects) {
         super();
         this.context = context;
         this.objects = objects;

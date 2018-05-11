@@ -1,8 +1,9 @@
 package com.smx.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BillListWsDTO {
+public class BillListWsDTO implements Serializable {
 
     private String date;
 

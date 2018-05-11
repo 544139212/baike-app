@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smx.dialog.ImageDialog;
-import com.smx.dto.LinkWsDTO;
 
 import java.util.Collections;
 
@@ -43,15 +42,8 @@ public class WebViewActivity extends BasicActivity {
         });
         tvCenter.setText("详细");
 
-        String type = getIntent().getStringExtra("type");
-        if ("blog".equals(type)) {
-            LinkWsDTO linkWsDTO = (LinkWsDTO)getIntent().getSerializableExtra("blog");
-            webView.loadDataWithBaseURL(Configuration.ws_url, linkWsDTO.getUrl(), "text/html", "utf-8", null);
-        } else if ("link".equals(type)) {
-            LinkWsDTO linkWsDTO = (LinkWsDTO) getIntent().getSerializableExtra("link");
-            String url = linkWsDTO.getUrl();
-             webView.loadUrl(linkWsDTO.getUrl());
-        }
+        webView.loadUrl("http://image.baidu.com/");
+
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JavascriptInterface(this), "imagelistner");
         webView.setWebViewClient(new WebViewClient() {

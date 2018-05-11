@@ -114,20 +114,8 @@ public class MainActivity extends BasicActivity
 //        setSupportActionBar(toolbar);
 
         //屏蔽浮动按钮
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences preferences = getSharedPreferences("LOGIN", MODE_PRIVATE);
-                String indicator = preferences.getString("INDICATOR", "N");
-                if ("Y".equals(indicator)) {
-                    go(MainActivity.this, CreateActivity.class);
-                } else {
-                    Snackbar.make(view, "你尚未登录，请先登录", Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null).show();
-                }
-            }
-        });*/
+//        Snackbar.make(view, "你尚未登录，请先登录", Snackbar.LENGTH_SHORT)
+//                .setAction("Action", null).show();
 
         //屏蔽屏蔽默认toolbar(以下5行)
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

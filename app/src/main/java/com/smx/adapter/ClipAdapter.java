@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.smx.R;
 import com.smx.WebViewActivity;
-import com.smx.dto.LinkWsDTO;
+import com.smx.dto.BillListWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -28,13 +28,13 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
  * Created by vivo on 2017/10/1.
  */
 
-public class ClipAdapter extends ArrayAdapter<LinkWsDTO> {
+public class ClipAdapter extends ArrayAdapter<BillListWsDTO> {
 
     Context context;
     int resource;
-    List<LinkWsDTO> objects;
+    List<BillListWsDTO> objects;
 
-    public ClipAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<LinkWsDTO> objects) {
+    public ClipAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BillListWsDTO> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -44,7 +44,7 @@ public class ClipAdapter extends ArrayAdapter<LinkWsDTO> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final LinkWsDTO dto = objects.get(position);
+        final BillListWsDTO dto = objects.get(position);
         final LinkViewHolder newsViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(resource, parent, false);
@@ -69,8 +69,6 @@ public class ClipAdapter extends ArrayAdapter<LinkWsDTO> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WebViewActivity.class);
-                intent.putExtra("type", "link");
-                intent.putExtra("link", dto);
                 context.startActivity(intent);
             }
         });

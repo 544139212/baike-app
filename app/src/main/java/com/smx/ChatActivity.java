@@ -38,7 +38,7 @@ import com.smx.adapter.FacePageAdapter;
 import com.smx.baidupush.BaiduPushReceiver;
 import com.smx.baidupush.BaiduPushSender;
 import com.smx.baidupush.Utils;
-import com.smx.dto.LocationListWsDTO;
+import com.smx.dto.BillListRespWsDTO;
 import com.smx.receiver.ConnectivityChangeReceiver;
 import com.smx.util.NetUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -138,7 +138,7 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
         layoutSmile.setAdapter(facePageAdapter);
         layoutSmile.addOnPageChangeListener(this);
 
-        int messageId = getIntent().getIntExtra("MESSAGE_ID", 0);
+        String messageId = getIntent().getStringExtra("MESSAGE_ID");
         tvCenter.setText("与" + messageId + "聊天中");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
@@ -162,10 +162,10 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this;
-        OkHttpUtils.get().url(Configuration.ws_url + "/location/getLocations").build().execute(new Callback<LocationListWsDTO>() {
+        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
             @Override
-            public LocationListWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), LocationListWsDTO.class);
+            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
             }
 
             @Override
@@ -178,7 +178,7 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
             }
 
             @Override
-            public void onResponse(LocationListWsDTO o, int i) {
+            public void onResponse(BillListRespWsDTO o, int i) {
                 ChatAdapter chatAdapter = new ChatAdapter(context, o.getData());
                 listView.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();

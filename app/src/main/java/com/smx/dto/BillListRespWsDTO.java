@@ -1,25 +1,16 @@
 package com.smx.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wangh on 2017/10/23.
  */
-public class BillListRespWsDTO {
+public class BillListRespWsDTO implements Serializable {
 
     private int code;
     private String msg;
     private List<BillListWsDTO> data;
-
-    public BillListRespWsDTO(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-    public BillListRespWsDTO(int code, String msg, List<BillListWsDTO> data) {
-        this.code = code;
-        this.msg = msg;
-        this.data = data;
-    }
 
     public int getCode() {
         return code;

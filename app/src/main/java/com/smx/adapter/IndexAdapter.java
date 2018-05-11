@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smx.R;
-import com.smx.dto.LinkWsDTO;
+import com.smx.dto.BillListWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -29,9 +29,9 @@ import butterknife.ButterKnife;
 public class IndexAdapter extends BaseAdapter {
 
     Context context;
-    List<LinkWsDTO> objects;
+    List<BillListWsDTO> objects;
 
-    public  IndexAdapter(@NonNull Context context, @NonNull List<LinkWsDTO> objects) {
+    public  IndexAdapter(@NonNull Context context, @NonNull List<BillListWsDTO> objects) {
         super();
         this.context = context;
         this.objects = objects;
@@ -40,7 +40,7 @@ public class IndexAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final LinkWsDTO dto = objects.get(position);
+        final BillListWsDTO dto = objects.get(position);
         int type = getItemViewType(position);
         if (type == 0) {
             final IndexViewHolder newsViewHolder;

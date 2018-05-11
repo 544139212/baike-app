@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
 import com.smx.adapter.ClipAdapter;
-import com.smx.dto.LinkListRespWsDTO;
+import com.smx.dto.BillListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -63,10 +63,10 @@ public class ClipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this.getActivity();
-        OkHttpUtils.get().url(Configuration.ws_url + "/link/getLinks").build().execute(new Callback<LinkListRespWsDTO>() {
+        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
             @Override
-            public LinkListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), LinkListRespWsDTO.class);
+            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
             }
 
             @Override
@@ -79,8 +79,8 @@ public class ClipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
 
             @Override
-            public void onResponse(LinkListRespWsDTO o, int i) {
-                ClipAdapter clipAdapter = new ClipAdapter(context, R.layout.item_clip, o.getData().getList());
+            public void onResponse(BillListRespWsDTO o, int i) {
+                ClipAdapter clipAdapter = new ClipAdapter(context, R.layout.item_clip, o.getData());
                 listView.setAdapter(clipAdapter);
                 clipAdapter.notifyDataSetChanged();
 

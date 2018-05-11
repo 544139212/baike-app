@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smx.adapter.MessageAdapter;
-import com.smx.dto.LocationListWsDTO;
+import com.smx.dto.BillListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -62,10 +61,10 @@ public class MessageActivity extends BasicActivity implements SwipeRefreshLayout
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this;
-        OkHttpUtils.get().url(Configuration.ws_url + "/location/getLocations").build().execute(new Callback<LocationListWsDTO>() {
+        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
             @Override
-            public LocationListWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), LocationListWsDTO.class);
+            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
             }
 
             @Override
@@ -78,7 +77,7 @@ public class MessageActivity extends BasicActivity implements SwipeRefreshLayout
             }
 
             @Override
-            public void onResponse(LocationListWsDTO o, int i) {
+            public void onResponse(BillListRespWsDTO o, int i) {
                 MessageAdapter messageAdapter = new MessageAdapter(context, R.layout.item_message, o.getData());
                 listView.setAdapter(messageAdapter);
                 messageAdapter.notifyDataSetChanged();

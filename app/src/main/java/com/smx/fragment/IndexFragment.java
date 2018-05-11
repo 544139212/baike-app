@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
 import com.smx.adapter.IndexAdapter;
-import com.smx.dto.LinkListRespWsDTO;
-import com.smx.dto.LinkListWsDTO;
+import com.smx.dto.BillListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -65,10 +63,10 @@ public class IndexFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this.getActivity();
-        OkHttpUtils.get().url(Configuration.ws_url + "/link/getLinks").build().execute(new Callback<LinkListRespWsDTO>() {
+        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
             @Override
-            public LinkListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), LinkListRespWsDTO.class);
+            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
             }
 
             @Override
@@ -81,8 +79,8 @@ public class IndexFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
 
             @Override
-            public void onResponse(LinkListRespWsDTO o, int i) {
-                IndexAdapter indexAdapter = new IndexAdapter(context, o.getData().getList());
+            public void onResponse(BillListRespWsDTO o, int i) {
+                IndexAdapter indexAdapter = new IndexAdapter(context, o.getData());
                 listView.setAdapter(indexAdapter);
                 indexAdapter.notifyDataSetChanged();
 

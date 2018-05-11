@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.smx.ChatActivity;
 import com.smx.R;
-import com.smx.dto.LocationWsDTO;
+import com.smx.dto.BillListWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -28,13 +28,13 @@ import butterknife.ButterKnife;
  * Created by vivo on 2017/10/1.
  */
 
-public class MessageAdapter extends ArrayAdapter<LocationWsDTO> {
+public class MessageAdapter extends ArrayAdapter<BillListWsDTO> {
 
     Context context;
     int resource;
-    List<LocationWsDTO> objects;
+    List<BillListWsDTO> objects;
 
-    public MessageAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<LocationWsDTO> objects) {
+    public MessageAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BillListWsDTO> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -66,7 +66,7 @@ public class MessageAdapter extends ArrayAdapter<LocationWsDTO> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("MESSAGE_ID", objects.get(position).getId());
+                intent.putExtra("MESSAGE_ID", objects.get(position).getDate());
                 context.startActivity(intent);
                 ((Activity)context).finish();
             }
