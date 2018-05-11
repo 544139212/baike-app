@@ -209,13 +209,13 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        goAndFinish(this, MessageActivity.class);
+        goAndFinish(this, MainActivity.class);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_left) {
-            goAndFinish(this, MessageActivity.class);
+            goAndFinish(this, MainActivity.class);
         }
         if (v.getId() == R.id.tv_network) {
             startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS));

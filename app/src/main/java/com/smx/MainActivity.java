@@ -23,9 +23,9 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.smx.fragment.ClipFragment;
 import com.smx.fragment.IndexFragment;
-import com.smx.fragment.SongFragment;
+import com.smx.fragment.MessageFragment;
+import com.smx.fragment.ProfileFragment;
 import com.smx.receiver.ScreenOffReceiver;
 import com.smx.receiver.ScreenOnReceiver;
 import com.smx.receiver.TimeTickBroadcaseReceiver;
@@ -49,18 +49,18 @@ public class MainActivity extends BasicActivity
     @BindView(R.id.iv_right)
     ImageView ivRight;
 
-    ClipFragment clipFragment;
     IndexFragment indexFragment;
-    SongFragment songFragment;
-
-    @BindView(R.id.rb_clip)
-    TextView tvClip;
+    MessageFragment messageFragment;
+    ProfileFragment profileFragment;
 
     @BindView(R.id.rb_index)
     TextView tvIndex;
 
-    @BindView(R.id.rb_song)
-    TextView tvSong;
+    @BindView(R.id.rb_message)
+    TextView tvMessage;
+
+    @BindView(R.id.rb_profile)
+    TextView tvProfile;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -96,14 +96,14 @@ public class MainActivity extends BasicActivity
         ivRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                go(MainActivity.this, MessageActivity.class);
+//                go(MainActivity.this, MainActivity.class);
             }
         });
 
 
-        tvClip.setOnClickListener(this);
         tvIndex.setOnClickListener(this);
-        tvSong.setOnClickListener(this);
+        tvMessage.setOnClickListener(this);
+        tvProfile.setOnClickListener(this);
 
         changeTitle(currentId);
         changeFragment(currentId);
@@ -266,14 +266,14 @@ public class MainActivity extends BasicActivity
 
     private void changeTitle(int resId) {
         switch (resId) {
-            case R.id.rb_clip:
-                tvCenter.setText(tvClip.getText());
-                break;
             case R.id.rb_index:
                 tvCenter.setText(tvIndex.getText());
                 break;
-            case R.id.rb_song:
-                tvCenter.setText(tvSong.getText());
+            case R.id.rb_message:
+                tvCenter.setText(tvMessage.getText());
+                break;
+            case R.id.rb_profile:
+                tvCenter.setText(tvProfile.getText());
                 break;
         }
     }
@@ -281,25 +281,17 @@ public class MainActivity extends BasicActivity
     private void changeFragment(int resId) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (clipFragment != null) {
-            transaction.hide(clipFragment);
-        }
         if (indexFragment != null) {
             transaction.hide(indexFragment);
         }
-        if (songFragment != null) {
-            transaction.hide(songFragment);
+        if (messageFragment != null) {
+            transaction.hide(messageFragment);
+        }
+        if (profileFragment != null) {
+            transaction.hide(profileFragment);
         }
 
         switch (resId) {
-            case R.id.rb_clip:
-                if (clipFragment == null) {
-                    clipFragment = ClipFragment.newInstance();
-                    transaction.add(R.id.main_container, clipFragment);
-                } else {
-                    transaction.show(clipFragment);
-                }
-                break;
             case R.id.rb_index:
                 if (indexFragment == null){
                     indexFragment = IndexFragment.newInstance();
@@ -308,12 +300,20 @@ public class MainActivity extends BasicActivity
                     transaction.show(indexFragment);
                 }
                 break;
-            case R.id.rb_song:
-                if (songFragment == null){
-                    songFragment = SongFragment.newInstance();
-                    transaction.add(R.id.main_container, songFragment);
+            case R.id.rb_message:
+                if (messageFragment == null){
+                    messageFragment = MessageFragment.newInstance();
+                    transaction.add(R.id.main_container, messageFragment);
                 } else {
-                    transaction.show(songFragment);
+                    transaction.show(messageFragment);
+                }
+                break;
+            case R.id.rb_profile:
+                if (profileFragment == null){
+                    profileFragment = ProfileFragment.newInstance();
+                    transaction.add(R.id.main_container, profileFragment);
+                } else {
+                    transaction.show(profileFragment);
                 }
                 break;
         }
@@ -322,19 +322,19 @@ public class MainActivity extends BasicActivity
     }
 
     private void changeSelect(int resId) {
-        tvClip.setSelected(false);
         tvIndex.setSelected(false);
-        tvSong.setSelected(false);
+        tvMessage.setSelected(false);
+        tvProfile.setSelected(false);
 
         switch (resId) {
-            case R.id.rb_clip:
-                tvClip.setSelected(true);
-                break;
             case R.id.rb_index:
                 tvIndex.setSelected(true);
                 break;
-            case R.id.rb_song:
-                tvSong.setSelected(true);
+            case R.id.rb_message:
+                tvMessage.setSelected(true);
+                break;
+            case R.id.rb_profile:
+                tvProfile.setSelected(true);
                 break;
         }
     }

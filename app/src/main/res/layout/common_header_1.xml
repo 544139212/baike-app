@@ -10,7 +10,8 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentLeft="true"
         android:src="@mipmap/menu"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_center"
@@ -24,7 +25,8 @@
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/message"
-        android:scaleType="centerInside"/>
+        android:src="@mipmap/add"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
 
 </RelativeLayout>

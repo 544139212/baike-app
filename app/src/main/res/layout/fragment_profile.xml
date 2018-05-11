@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.smx.fragment.ProfileFragment" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+        <ImageView
+            android:id="@+id/acount_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/acount_nick"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_toRightOf="@id/acount_head"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:includeFontPadding="false"
+            android:padding="0dp"
+            android:maxLines="1"
+            android:text="蓝精灵"
+            android:textColor="@color/white_FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/acount_more"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/acount_nick"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_toRightOf="@id/acount_head"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:includeFontPadding="false"
+            android:padding="0dp"
+            android:maxLines="1"
+            android:text="怎能缺少如此般的优雅"
+            android:textColor="#dedede"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_bill"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white_FFFFFF"
+        android:clickable="true"
+        android:drawableRight="@mipmap/arrow_right_gray"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/fab_margin"
+        android:paddingRight="@dimen/fab_margin"
+        android:text="账单"
+        style="@style/H3"/>
+
+</LinearLayout>

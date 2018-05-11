@@ -90,7 +90,6 @@
         <!-- 个人资料 -->
         <TextView
             android:id="@+id/my_profile"
-            style="@style/H3"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@color/pink_F4CCD5"
@@ -99,7 +98,8 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="账号资料" />
+            android:text="账号资料"
+            style="@style/H3"/>
 
 
         <!-- 账号安全 -->

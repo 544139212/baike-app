@@ -155,59 +155,7 @@
 
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/pink_F4CCD5"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp" >
 
-            <ImageView
-                android:id="@+id/acount_head"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:focusable="true"
-                android:clickable="true"
-                android:background="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/acount_nick"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="18dp"
-                android:layout_toRightOf="@id/acount_head"
-                android:ellipsize="end"
-                android:gravity="left|center"
-                android:includeFontPadding="false"
-                android:padding="0dp"
-                android:maxLines="1"
-                android:text="way"
-                android:textColor="#ff0e0e0e"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/acount_more"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/acount_nick"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="18dp"
-                android:layout_toRightOf="@id/acount_head"
-                android:ellipsize="end"
-                android:gravity="left|center"
-                android:includeFontPadding="false"
-                android:padding="0dp"
-                android:maxLines="1"
-                android:text="爱生活,爱安卓"
-                android:textColor="#ff777777"
-                android:textSize="16sp" />
-
-        </RelativeLayout>
 
 
 

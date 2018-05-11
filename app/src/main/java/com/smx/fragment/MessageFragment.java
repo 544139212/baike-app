@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
-import com.smx.adapter.SongAdapter;
+import com.smx.adapter.MessageAdapter;
 import com.smx.dto.BillListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -20,17 +20,17 @@ import com.zhy.http.okhttp.callback.Callback;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class SongFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MessageFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     SwipeRefreshLayout swipeRefreshLayout;
     ListView listView;
 
-    public SongFragment() {
+    public MessageFragment() {
 
     }
 
-    public static SongFragment newInstance() {
-        SongFragment fragment = new SongFragment();
+    public static MessageFragment newInstance() {
+        MessageFragment fragment = new MessageFragment();
         return fragment;
     }
 
@@ -43,7 +43,7 @@ public class SongFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_song, container, false);
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -80,9 +80,9 @@ public class SongFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
             @Override
             public void onResponse(BillListRespWsDTO o, int i) {
-                SongAdapter songAdapter = new SongAdapter(context, R.layout.item_song, o.getData());
-                listView.setAdapter(songAdapter);
-                songAdapter.notifyDataSetChanged();
+                MessageAdapter messageAdapter = new MessageAdapter(context, R.layout.item_message, o.getData());
+                listView.setAdapter(messageAdapter);
+                messageAdapter.notifyDataSetChanged();
 
                 if (isSwipeRefresh) {
                     swipeRefreshLayout.setRefreshing(false);

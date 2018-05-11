@@ -63,7 +63,6 @@
         <activity
             android:name=".GuideActivity"
             android:theme="@style/AppTheme.NoTotitleBar" />
-        <activity android:name=".MessageActivity" />
         <activity
             android:name=".ChatActivity"
             android:windowSoftInputMode="stateHidden" />

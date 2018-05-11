@@ -21,25 +21,23 @@
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextViewButtonStyle">
-        <item name="android:textSize">10sp</item>
-        <item name="android:drawablePadding">3dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@drawable/tv_selector</item>
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">5dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="RadioButtonStyle">
         <item name="android:textSize">12sp</item>
-        <item name="android:drawablePadding">3dp</item>
         <item name="android:textColor">@drawable/rb_selector</item>
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">5dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

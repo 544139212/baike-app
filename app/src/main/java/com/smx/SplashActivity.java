@@ -19,7 +19,7 @@ public class SplashActivity extends BasicActivity {
                 if ("Y".equals(indicator)) {
                     goAndFinish(SplashActivity.this, GuideActivity.class);
                 } else {
-                    goAndFinish(SplashActivity.this, LoginActivity.class);
+                    goAndFinish(SplashActivity.this, GuideActivity.class);
 //                    goAndFinish(SplashActivity.this, BillActivity.class);
                 }
             }

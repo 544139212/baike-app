@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/RadioButtonStyle"
-            android:drawableTop="@drawable/index_rb_selector"
+            android:drawableTop="@drawable/guide_rb_selector"
             android:text="胖胖"
             android:checked="true"/>
 
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/RadioButtonStyle"
-            android:drawableTop="@drawable/index_rb_selector"
+            android:drawableTop="@drawable/guide_rb_selector"
             android:text="亲爱哒"/>
 
         <RadioButton
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/RadioButtonStyle"
-            android:drawableTop="@drawable/index_rb_selector"
+            android:drawableTop="@drawable/guide_rb_selector"
             android:text="胖胖"/>
     </RadioGroup>
 
