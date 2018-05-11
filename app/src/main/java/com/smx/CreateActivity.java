@@ -48,7 +48,7 @@ public class CreateActivity extends BasicActivity implements View.OnClickListene
         ButterKnife.bind(this);
 
         ivLeft.setOnClickListener(this);
-        tvCenter.setText("记账");
+        tvCenter.setText("账务录入");
         tvRight.setText("保存");
         tvRight.setOnClickListener(this);
     }
