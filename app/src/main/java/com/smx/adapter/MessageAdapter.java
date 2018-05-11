@@ -1,6 +1,5 @@
 package com.smx.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.LayoutRes;
@@ -68,7 +67,6 @@ public class MessageAdapter extends ArrayAdapter<BillListWsDTO> {
                 Intent intent = new Intent(context, ChatActivity.class);
                 intent.putExtra("MESSAGE_ID", objects.get(position).getDate());
                 context.startActivity(intent);
-                ((Activity)context).finish();
             }
         });
         return convertView;

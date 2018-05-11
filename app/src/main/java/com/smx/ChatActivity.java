@@ -209,13 +209,13 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        goAndFinish(this, MainActivity.class);
+        finish();
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_left) {
-            goAndFinish(this, MainActivity.class);
+            finish();
         }
         if (v.getId() == R.id.tv_network) {
             startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS));
@@ -409,7 +409,7 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
 
     @Override
     public void onBind(String method, int errorCode, String content) {
-        Toast.makeText(this, "绑定", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, content, Toast.LENGTH_LONG).show();
     }
 
     @Override

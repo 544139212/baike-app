@@ -37,7 +37,7 @@ public class WebViewActivity extends BasicActivity {
         ivLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goAndFinish(WebViewActivity.this, MainActivity.class);
+                finish();
             }
         });
         tvCenter.setText("详细");
@@ -75,9 +75,15 @@ public class WebViewActivity extends BasicActivity {
             webView.goBack();
             return true;
         } else {
-            super.onBackPressed();
+            finish();
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
     }
 
     public class JavascriptInterface {

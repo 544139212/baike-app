@@ -1,7 +1,5 @@
 package com.smx;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -39,10 +37,14 @@ public class AboutUsActivity extends BasicActivity implements View.OnClickListen
     }
 
     @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_left) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
             finish();
         }
     }

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/common_header_2"/>
+        layout="@layout/common_header_3"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

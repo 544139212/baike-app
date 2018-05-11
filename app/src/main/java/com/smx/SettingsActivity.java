@@ -39,7 +39,7 @@ public class SettingsActivity extends BasicActivity {
         ivLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goAndFinish(SettingsActivity.this, MainActivity.class);
+                finish();
             }
         });
         tvCenter.setText("设置");

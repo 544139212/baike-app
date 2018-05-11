@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -19,7 +20,10 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class BillActivity extends BasicActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class BillActivity extends BasicActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+
+    @BindView(R.id.iv_left)
+    ImageView ivLeft;
 
     @BindView(R.id.tv_center)
     TextView tvCenter;
@@ -37,6 +41,7 @@ public class BillActivity extends BasicActivity implements SwipeRefreshLayout.On
 
         ButterKnife.bind(this);
 
+        ivLeft.setOnClickListener(this);
         tvCenter.setText("账务明细");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -98,4 +103,16 @@ public class BillActivity extends BasicActivity implements SwipeRefreshLayout.On
         });
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.iv_left) {
+            finish();
+        }
+    }
 }

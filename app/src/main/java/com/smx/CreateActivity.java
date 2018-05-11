@@ -1,19 +1,14 @@
 package com.smx;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.smx.adapter.BillAdapter;
-import com.smx.dto.BillListRespWsDTO;
 import com.smx.dto.ResultDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -54,11 +49,15 @@ public class CreateActivity extends BasicActivity implements View.OnClickListene
     }
 
     @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_left) {
-            Intent intent = new Intent(this, BillActivity.class);
-            startActivity(intent);
-//            finish();
+            finish();
         } else if (v.getId() == R.id.tv_right) {
             String name = etName.getText().toString();
             String cost = etCost.getText().toString();
@@ -88,8 +87,7 @@ public class CreateActivity extends BasicActivity implements View.OnClickListene
                 @Override
                 public void onResponse(ResultDTO o, int i) {
                     if (o.getCode() == 200) {
-                        Intent intent = new Intent(CreateActivity.this, BillActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 }
             });
