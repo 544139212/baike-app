@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.smx.R;
 import com.smx.WebViewActivity;
-import com.smx.dto.BillListWsDTO;
+import com.smx.dto.DateBillWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -33,9 +33,9 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 public class IndexAdapter extends BaseAdapter {
 
     Context context;
-    List<BillListWsDTO> objects;
+    List<DateBillWsDTO> objects;
 
-    public  IndexAdapter(@NonNull Context context, @NonNull List<BillListWsDTO> objects) {
+    public  IndexAdapter(@NonNull Context context, @NonNull List<DateBillWsDTO> objects) {
         super();
         this.context = context;
         this.objects = objects;
@@ -44,7 +44,7 @@ public class IndexAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final BillListWsDTO dto = objects.get(position);
+        final DateBillWsDTO dto = objects.get(position);
         int type = getItemViewType(position);
         if (type == 0) {
             final IndexViewHolder newsViewHolder;

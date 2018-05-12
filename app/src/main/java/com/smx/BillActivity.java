@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.smx.adapter.BillAdapter;
-import com.smx.dto.BillListRespWsDTO;
+import com.smx.dto.DateBillListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -65,10 +65,10 @@ public class BillActivity extends BasicActivity implements View.OnClickListener,
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this;
-        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
+        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<DateBillListRespWsDTO>() {
             @Override
-            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
+            public DateBillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), DateBillListRespWsDTO.class);
             }
 
             @Override
@@ -81,7 +81,7 @@ public class BillActivity extends BasicActivity implements View.OnClickListener,
             }
 
             @Override
-            public void onResponse(BillListRespWsDTO o, int i) {
+            public void onResponse(DateBillListRespWsDTO o, int i) {
                 BillAdapter billAdapter = new BillAdapter(context, o.getData());
                 expandableListView.setAdapter(billAdapter);
                 int count = expandableListView.getCount();

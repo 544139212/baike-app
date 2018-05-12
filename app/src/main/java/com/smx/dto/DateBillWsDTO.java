@@ -3,7 +3,7 @@ package com.smx.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class BillListWsDTO implements Serializable {
+public class DateBillWsDTO implements Serializable {
 
     private String date;
 

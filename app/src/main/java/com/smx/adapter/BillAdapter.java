@@ -9,7 +9,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.smx.R;
-import com.smx.dto.BillListWsDTO;
+import com.smx.dto.DateBillWsDTO;
 import com.smx.dto.BillWsDTO;
 
 import java.util.List;
@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
 public class BillAdapter extends BaseExpandableListAdapter {
 
     Context context;
-    List<BillListWsDTO> objects;
+    List<DateBillWsDTO> objects;
 
-    public BillAdapter(@NonNull Context context, @NonNull List<BillListWsDTO> objects) {
+    public BillAdapter(@NonNull Context context, @NonNull List<DateBillWsDTO> objects) {
         this.context = context;
         this.objects = objects;
     }
@@ -69,7 +69,7 @@ public class BillAdapter extends BaseExpandableListAdapter {
     @NonNull
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final BillListWsDTO dto = objects.get(groupPosition);
+        final DateBillWsDTO dto = objects.get(groupPosition);
         final DateViewHolder newsViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bill_date, parent, false);

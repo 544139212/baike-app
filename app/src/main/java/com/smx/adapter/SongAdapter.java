@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.smx.R;
 import com.smx.WebViewActivity;
-import com.smx.dto.BillListWsDTO;
+import com.smx.dto.DateBillWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -28,13 +28,13 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
  * Created by vivo on 2017/10/1.
  */
 
-public class SongAdapter extends ArrayAdapter<BillListWsDTO> {
+public class SongAdapter extends ArrayAdapter<DateBillWsDTO> {
 
     Context context;
     int resource;
-    List<BillListWsDTO> objects;
+    List<DateBillWsDTO> objects;
 
-    public SongAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BillListWsDTO> objects) {
+    public SongAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<DateBillWsDTO> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -44,7 +44,7 @@ public class SongAdapter extends ArrayAdapter<BillListWsDTO> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final BillListWsDTO dto = objects.get(position);
+        final DateBillWsDTO dto = objects.get(position);
         final LinkViewHolder newsViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(resource, parent, false);

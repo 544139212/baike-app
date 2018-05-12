@@ -2,6 +2,7 @@ package com.smx;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -33,10 +34,11 @@ import com.google.gson.Gson;
 import com.smx.adapter.ChatAdapter;
 import com.smx.adapter.FaceAdapter;
 import com.smx.adapter.FacePageAdapter;
-import com.smx.dto.BillListRespWsDTO;
+import com.smx.dto.DateBillListRespWsDTO;
+import com.smx.dto.MessageListRespWsDTO;
+import com.smx.dto.ResultDTO;
 import com.smx.jpush.JPushReceiver;
 import com.smx.receiver.ConnectivityChangeReceiver;
-import com.smx.util.Logger;
 import com.smx.util.NetUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -112,6 +114,8 @@ public class ChatActivity extends BasicActivity
 
     int currentPage = 0;
 
+    String tPhone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,9 +124,6 @@ public class ChatActivity extends BasicActivity
         ButterKnife.bind(this);
 
         JPushInterface.init(getApplicationContext());
-        String registrationId = JPushInterface.getRegistrationID(getApplicationContext());
-        Toast.makeText(ChatActivity.this, "RegistrationId=" + registrationId, Toast.LENGTH_LONG).show();
-        Logger.i("RegistrationId=" + registrationId);
 
         ivLeft.setOnClickListener(this);
         tvNetwork.setOnClickListener(this);
@@ -145,21 +146,21 @@ public class ChatActivity extends BasicActivity
         layoutSmile.setAdapter(facePageAdapter);
         layoutSmile.addOnPageChangeListener(this);
 
-        String messageId = getIntent().getStringExtra("MESSAGE_ID");
-        tvCenter.setText("与" + messageId + "聊天中");
+        tPhone = getIntent().getStringExtra("T_PHONE");
+        tvCenter.setText("与" + tPhone + "聊天中");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
 
         loadData(false);
 
         //因为推送服务不可用，无法接收推送消息，因此先通过构造定时器，以定时轮询方式获取消息，推送服务可用后屏蔽下面代码
-        Timer timer = new Timer();
+        /*Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 handler.sendEmptyMessage(0x002);
             }
-        }, 0, 30000);
+        }, 0, 30000);*/
     }
 
     @Override
@@ -169,10 +170,15 @@ public class ChatActivity extends BasicActivity
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this;
-        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
+        SharedPreferences preferences = context.getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
+        String oPhone = preferences.getString("O_PHONE", "");
+        OkHttpUtils.get().url(Configuration.ws_url + "/message/getMessages")
+                .addParams("oPhone", oPhone)
+                .addParams("tPhone", tPhone)
+                .build().execute(new Callback<MessageListRespWsDTO>() {
             @Override
-            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
+            public MessageListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), MessageListRespWsDTO.class);
             }
 
             @Override
@@ -185,7 +191,7 @@ public class ChatActivity extends BasicActivity
             }
 
             @Override
-            public void onResponse(BillListRespWsDTO o, int i) {
+            public void onResponse(MessageListRespWsDTO o, int i) {
                 ChatAdapter chatAdapter = new ChatAdapter(context, o.getData());
                 listView.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();
@@ -332,43 +338,32 @@ public class ChatActivity extends BasicActivity
         }
         if (v.getId() == R.id.b_chat_send) {
             //推送消息并保存到服务器
-            final Context context = v.getContext();
-            OkHttpUtils.post().url(Configuration.ws_url + "/location/add")
-                    .addParams("longitude", "113.879761")
-                    .addParams("latitude", "22.596347")
-                    .addParams("addressLine1", etChatInput.getText().toString())
-                    .addParams("addressLine2", "2017-07-09 01:56:21")
-                    .addParams("addressLine3", "大河报")
-                    .addParams("addressLine4", "1,2,3,4,5,6,7,8,9")
-                    .addParams("addressLine5", "10-05")
-                    .addParams("addressLine6", "")
-                    .addParams("addressLine7", "")
-                    .addParams("addressLine8", "")
-                    .addParams("addressLine9", "")
-                    .addParams("addressLine10", "")
-                    .addParams("createTime", "2010-07-09 01:56:21")
-                    .addParams("createBy", "wh@aishk.com")
-                    .build().execute(new Callback<String>() {
+            SharedPreferences preferences = getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
+            String oPhone = preferences.getString("O_PHONE", "");
+            OkHttpUtils.post().url(Configuration.ws_url + "/message/add")
+                    .addParams("oPhone", oPhone)
+                    .addParams("tPhone", tPhone)
+                    .addParams("message", etChatInput.getText().toString())
+                    .build().execute(new Callback<ResultDTO>() {
                 @Override
-                public String parseNetworkResponse(Response response, int i) throws Exception {
-                    return new Gson().fromJson(response.body().string(), String.class);
+                public ResultDTO parseNetworkResponse(Response response, int i) throws Exception {
+                    return new Gson().fromJson(response.body().string(), ResultDTO.class);
                 }
 
                 @Override
                 public void onError(Call call, Exception e, int i) {
-                    e.printStackTrace();
+
                 }
 
                 @Override
-                public void onResponse(String o, int i) {
-
+                public void onResponse(ResultDTO o, int i) {
+                    if (o.getCode() == 200) {
+                        // 成功
+                        etChatInput.setText("");//清空输入框
+                        loadData(false);
+                    }
                 }
             });
-
-            //清空输入框
-            etChatInput.setText("");
-
-            loadData(false);
         }
     }
 
@@ -420,8 +415,6 @@ public class ChatActivity extends BasicActivity
 
     @Override
     public void onReceiverMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-
         Message handlerMsg = handler.obtainMessage(0x001);
         handlerMsg.obj = message;
         handler.sendMessage(handlerMsg);
@@ -628,15 +621,17 @@ public class ChatActivity extends BasicActivity
         return views;
     }
 
+    //处理消息
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
 //            super.handleMessage(msg);
             if (msg.what == 0x001) {
-                Object obj = msg.obj;
-                System.out.println((String)obj);
-                //处理消息
-                Toast.makeText(ChatActivity.this, (String)obj, Toast.LENGTH_LONG).show();
+                // 已收到消息内容
+//                Object obj = msg.obj;
+//                Toast.makeText(ChatActivity.this, (String)obj, Toast.LENGTH_LONG).show();
+
+                loadData(false);
             }
             if (msg.what == 0x002) {
                 loadData(false);

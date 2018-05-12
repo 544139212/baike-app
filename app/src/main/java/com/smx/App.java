@@ -14,8 +14,8 @@ public class App extends Application {
 	
 
 	private static App _instance;
-	
-	
+
+
 	private SharePreferenceUtil mSpUtil;
 	private MediaPlayer mMediaPlayer;
 	private Notification mNotification;

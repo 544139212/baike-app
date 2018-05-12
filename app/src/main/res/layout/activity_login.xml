@@ -32,7 +32,7 @@
         android:paddingRight="50dp"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/edtUserName"
+            android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -41,10 +41,10 @@
             android:drawablePadding="10dp"
             android:inputType="text"
             android:maxLength="16"
-            android:hint="用户名/手机号/邮箱"
+            android:hint="手机号"
             style="@style/H3_2"/>
         <EditText
-            android:id="@+id/edtPassword"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

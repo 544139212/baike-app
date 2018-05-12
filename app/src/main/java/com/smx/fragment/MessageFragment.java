@@ -1,6 +1,7 @@
 package com.smx.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,12 +14,14 @@ import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
 import com.smx.adapter.MessageAdapter;
-import com.smx.dto.BillListRespWsDTO;
+import com.smx.dto.MessageListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import okhttp3.Call;
 import okhttp3.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MessageFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -63,10 +66,12 @@ public class MessageFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this.getActivity();
-        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
+        SharedPreferences preferences = context.getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
+        String oPhone = preferences.getString("O_PHONE", "");
+        OkHttpUtils.get().url(Configuration.ws_url + "/message/getRecentContacts").addParams("oPhone", oPhone).build().execute(new Callback<MessageListRespWsDTO>() {
             @Override
-            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
+            public MessageListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), MessageListRespWsDTO.class);
             }
 
             @Override
@@ -79,7 +84,7 @@ public class MessageFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
 
             @Override
-            public void onResponse(BillListRespWsDTO o, int i) {
+            public void onResponse(MessageListRespWsDTO o, int i) {
                 MessageAdapter messageAdapter = new MessageAdapter(context, R.layout.item_message, o.getData());
                 listView.setAdapter(messageAdapter);
                 messageAdapter.notifyDataSetChanged();

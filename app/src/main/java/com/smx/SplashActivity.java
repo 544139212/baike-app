@@ -3,6 +3,7 @@ package com.smx;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 
 public class SplashActivity extends BasicActivity {
 
@@ -16,11 +17,16 @@ public class SplashActivity extends BasicActivity {
             public void run() {
                 SharedPreferences preferences = getSharedPreferences("GUIDE", MODE_PRIVATE);
                 String indicator = preferences.getString("INDICATOR", "N");
-                if ("Y".equals(indicator)) {
+                if (!TextUtils.equals(indicator, "Y")) {
                     goAndFinish(SplashActivity.this, GuideActivity.class);
                 } else {
-//                    goAndFinish(SplashActivity.this, LoginActivity.class);
-                    goAndFinish(SplashActivity.this, MainActivity.class);
+                    preferences = getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
+                    String phone = preferences.getString("O_PHONE", "");
+                    if (TextUtils.isEmpty(phone)) {
+                        goAndFinish(SplashActivity.this, LoginActivity.class);
+                    } else {
+                        goAndFinish(SplashActivity.this, MainActivity.class);
+                    }
                 }
             }
         }, 3500);

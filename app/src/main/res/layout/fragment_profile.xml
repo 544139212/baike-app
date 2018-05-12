@@ -11,8 +11,8 @@
         android:background="@color/colorPrimaryDark"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" >
-        <ImageView
-            android:id="@+id/acount_head"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_head"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentLeft="true"
@@ -20,15 +20,16 @@
             android:layout_marginLeft="20dp"
             android:focusable="true"
             android:clickable="true"
-            android:background="@mipmap/ic_launcher" />
+            android:src="@mipmap/splash"
+            android:scaleType="centerCrop"/>
 
         <TextView
-            android:id="@+id/acount_nick"
+            android:id="@+id/tv_phone"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="18dp"
-            android:layout_toRightOf="@id/acount_head"
+            android:layout_toRightOf="@id/iv_head"
             android:ellipsize="end"
             android:gravity="left|center"
             android:includeFontPadding="false"
@@ -39,14 +40,14 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/acount_more"
+            android:id="@+id/tv_intro"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/acount_nick"
+            android:layout_below="@id/tv_phone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="18dp"
-            android:layout_toRightOf="@id/acount_head"
+            android:layout_toRightOf="@id/iv_head"
             android:ellipsize="end"
             android:gravity="left|center"
             android:includeFontPadding="false"

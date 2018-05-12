@@ -14,8 +14,7 @@ import android.widget.TextView;
 
 import com.smx.ChatActivity;
 import com.smx.R;
-import com.smx.dto.BillListWsDTO;
-import com.smx.util.RandomStringUtil;
+import com.smx.dto.MessageWsDTO;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,13 +26,13 @@ import butterknife.ButterKnife;
  * Created by vivo on 2017/10/1.
  */
 
-public class MessageAdapter extends ArrayAdapter<BillListWsDTO> {
+public class MessageAdapter extends ArrayAdapter<MessageWsDTO> {
 
     Context context;
     int resource;
-    List<BillListWsDTO> objects;
+    List<MessageWsDTO> objects;
 
-    public MessageAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BillListWsDTO> objects) {
+    public MessageAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<MessageWsDTO> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -53,9 +52,9 @@ public class MessageAdapter extends ArrayAdapter<BillListWsDTO> {
         }
         try {
             Picasso.with(convertView.getContext()).load("https://unsplash.it/400/800/?random").into(newsViewHolder.ivMessageImg);
-            newsViewHolder.tvMessagePublisher.setText(RandomStringUtil.getRandomJianHan(5));
-            newsViewHolder.tvMessageTitle.setText(RandomStringUtil.getRandomJianHan(50));
-            newsViewHolder.tvMessageDate.setText("10-26");
+            newsViewHolder.tvMessagePublisher.setText(objects.get(position).gettPhone());
+            newsViewHolder.tvMessageTitle.setText(objects.get(position).getMessage());
+            newsViewHolder.tvMessageDate.setText(objects.get(position).getDate());
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -65,7 +64,7 @@ public class MessageAdapter extends ArrayAdapter<BillListWsDTO> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("MESSAGE_ID", objects.get(position).getDate());
+                intent.putExtra("T_PHONE", objects.get(position).gettPhone());
                 context.startActivity(intent);
             }
         });

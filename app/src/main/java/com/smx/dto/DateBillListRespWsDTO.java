@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * Created by wangh on 2017/10/23.
  */
-public class BillListRespWsDTO implements Serializable {
+public class DateBillListRespWsDTO implements Serializable {
 
     private int code;
     private String msg;
-    private List<BillListWsDTO> data;
+    private List<DateBillWsDTO> data;
 
     public int getCode() {
         return code;
@@ -28,11 +28,11 @@ public class BillListRespWsDTO implements Serializable {
         this.msg = msg;
     }
 
-    public List<BillListWsDTO> getData() {
+    public List<DateBillWsDTO> getData() {
         return data;
     }
 
-    public void setData(List<BillListWsDTO> data) {
+    public void setData(List<DateBillWsDTO> data) {
         this.data = data;
     }
 }

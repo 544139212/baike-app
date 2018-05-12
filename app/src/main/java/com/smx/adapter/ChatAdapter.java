@@ -1,6 +1,7 @@
 package com.smx.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -16,8 +17,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.smx.App;
 import com.smx.R;
-import com.smx.dto.BillListWsDTO;
+import com.smx.dto.DateBillWsDTO;
+import com.smx.dto.MessageWsDTO;
 import com.smx.util.RandomStringUtil;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +31,8 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by vivo on 2017/10/1.
  */
@@ -35,9 +40,9 @@ import butterknife.ButterKnife;
 public class ChatAdapter extends BaseAdapter {
 
     Context context;
-    List<BillListWsDTO> objects;
+    List<MessageWsDTO> objects;
 
-    public ChatAdapter(@NonNull Context context, @NonNull List<BillListWsDTO> objects) {
+    public ChatAdapter(@NonNull Context context, @NonNull List<MessageWsDTO> objects) {
         super();
         this.context = context;
         this.objects = objects;
@@ -58,7 +63,7 @@ public class ChatAdapter extends BaseAdapter {
             }
             try {
                 Picasso.with(convertView.getContext()).load("https://unsplash.it/400/800/?random").into(newsViewHolder.civAvator);
-                newsViewHolder.tvMessage.setText(convertNormalStringToSpannableString(RandomStringUtil.getRandomJianHan(50)));
+                newsViewHolder.tvMessage.setText(convertNormalStringToSpannableString(objects.get(position).getMessage()));
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
@@ -73,7 +78,7 @@ public class ChatAdapter extends BaseAdapter {
                 newsViewHolder = (MsgViewHolder) convertView.getTag();
             }
             try {
-                newsViewHolder.tvMessage.setText(convertNormalStringToSpannableString(RandomStringUtil.getRandomJianHan(50)));
+                newsViewHolder.tvMessage.setText(convertNormalStringToSpannableString(objects.get(position).getMessage()));
                 Picasso.with(convertView.getContext())
                         .load("https://unsplash.it/400/800/?random")
                         .into(newsViewHolder.civAvator);
@@ -81,7 +86,7 @@ public class ChatAdapter extends BaseAdapter {
                 // TODO: handle exception
                 e.printStackTrace();
             }
-        } else if (type == 2) {
+        } /*else if (type == 2) {
             final DateViewHolder newsViewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item, parent, false);
@@ -91,7 +96,7 @@ public class ChatAdapter extends BaseAdapter {
                 newsViewHolder = (DateViewHolder) convertView.getTag();
             }
             newsViewHolder.tvDate.setText("2017-10-25 17:00:12");
-        }
+        }*/
         return convertView;
     }
 
@@ -113,12 +118,19 @@ public class ChatAdapter extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
 //        return super.getItemViewType(position);
-        if (position % 3 == 1) {
+        /*if (position % 3 == 1) {
             return 0;
         } else if (position % 3 == 2) {
             return 1;
         } else {
             return 2;
+        }*/
+        SharedPreferences preferences = context.getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
+        String phone = preferences.getString("O_PHONE", "");
+        if (objects.get(position).getoPhone().equals(phone)) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 

@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.smx.Configuration;
 import com.smx.R;
 import com.smx.adapter.IndexAdapter;
-import com.smx.dto.BillListRespWsDTO;
+import com.smx.dto.DateBillListRespWsDTO;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -63,10 +63,10 @@ public class IndexFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     private void loadData(final boolean isSwipeRefresh) {
         final Context context = this.getActivity();
-        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<BillListRespWsDTO>() {
+        OkHttpUtils.get().url(Configuration.ws_url + "/bill/getBills").build().execute(new Callback<DateBillListRespWsDTO>() {
             @Override
-            public BillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
-                return new Gson().fromJson(response.body().string(), BillListRespWsDTO.class);
+            public DateBillListRespWsDTO parseNetworkResponse(Response response, int i) throws Exception {
+                return new Gson().fromJson(response.body().string(), DateBillListRespWsDTO.class);
             }
 
             @Override
@@ -79,7 +79,7 @@ public class IndexFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
 
             @Override
-            public void onResponse(BillListRespWsDTO o, int i) {
+            public void onResponse(DateBillListRespWsDTO o, int i) {
                 IndexAdapter indexAdapter = new IndexAdapter(context, o.getData());
                 listView.setAdapter(indexAdapter);
                 indexAdapter.notifyDataSetChanged();

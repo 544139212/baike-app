@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -12,6 +13,7 @@ import com.smx.adapter.GuideAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 
 public class GuideActivity extends BasicActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener, View.OnClickListener {
 
@@ -73,7 +75,7 @@ public class GuideActivity extends BasicActivity implements RadioGroup.OnChecked
             editor.putString("INDICATOR", "Y");
             editor.commit();
 
-            goAndFinish(GuideActivity.this, MainActivity.class);
+            goAndFinish(GuideActivity.this, LoginActivity.class);
         }
     }
 }
