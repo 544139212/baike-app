@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 
 import com.smx.util.SharePreferenceUtil;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class App extends Application {
 
 	public static final String SP_FILE_NAME = "push_msg_sp";
@@ -25,6 +27,9 @@ public class App extends Application {
 		super.onCreate();
 		_instance = this;
 		CrashHandler.getInstance().init(this);
+
+		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+		JPushInterface.init(this);     		// 初始化 JPush
 
 		//未见其作用，暂时屏蔽
         /*OkHttpClient okHttpClient = new OkHttpClient.Builder()

@@ -42,7 +42,7 @@ public class TimeUtil {
 		long currentSeconds = System.currentTimeMillis();
 		long timeGap = currentSeconds - time;// 与现在时间差
 		String timeStr = null;
-		L.i(" " + (timeGap - (60 * 60 * 1000)));
+		Logger.i(" " + (timeGap - (60 * 60 * 1000)));
 		if (timeGap > 24 * 3 * 60 * 60 * 1000) {
 			timeStr = getDayTime(time) + " " + getMinTime(time);
 		} else if (timeGap > 24 * 2 * 60 * 60 * 1000) {

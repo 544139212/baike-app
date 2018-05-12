@@ -29,17 +29,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.android.pushservice.PushConstants;
-import com.baidu.android.pushservice.PushManager;
 import com.google.gson.Gson;
 import com.smx.adapter.ChatAdapter;
 import com.smx.adapter.FaceAdapter;
 import com.smx.adapter.FacePageAdapter;
-import com.smx.baidupush.BaiduPushReceiver;
-import com.smx.baidupush.BaiduPushSender;
-import com.smx.baidupush.Utils;
 import com.smx.dto.BillListRespWsDTO;
+import com.smx.jpush.JPushReceiver;
 import com.smx.receiver.ConnectivityChangeReceiver;
+import com.smx.util.Logger;
 import com.smx.util.NetUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -53,10 +50,18 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class ChatActivity extends BasicActivity implements View.OnClickListener, View.OnLongClickListener, TextWatcher, ViewPager.OnPageChangeListener, SwipeRefreshLayout.OnRefreshListener, BaiduPushReceiver.OnReceiverListener, BaiduPushSender.OnSenderListener, ConnectivityChangeReceiver.OnChangeListener {
+public class ChatActivity extends BasicActivity
+        implements View.OnClickListener,
+        View.OnLongClickListener,
+        TextWatcher,
+        ViewPager.OnPageChangeListener,
+        SwipeRefreshLayout.OnRefreshListener,
+        JPushReceiver.OnReceiverListener,
+        ConnectivityChangeReceiver.OnChangeListener {
 
     @BindView(R.id.iv_left)
     ImageView ivLeft;
@@ -114,8 +119,10 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
 
         ButterKnife.bind(this);
 
-        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,
-                Utils.getMetaValue(this, "jwNIQ0GUvlmTNjhy1aHLXCSZ"));
+        JPushInterface.init(getApplicationContext());
+        String registrationId = JPushInterface.getRegistrationID(getApplicationContext());
+        Toast.makeText(ChatActivity.this, "RegistrationId=" + registrationId, Toast.LENGTH_LONG).show();
+        Logger.i("RegistrationId=" + registrationId);
 
         ivLeft.setOnClickListener(this);
         tvNetwork.setOnClickListener(this);
@@ -201,14 +208,15 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
             tvNetwork.setVisibility(View.GONE);
         }
 
-        BaiduPushReceiver.mListener = this;
-        BaiduPushSender.mListener = this;
+        JPushReceiver.mListener = this;
         ConnectivityChangeReceiver.mListener = this;
+        JPushInterface.resumePush(getApplicationContext());
     }
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
+        JPushInterface.stopPush(getApplicationContext());
         finish();
     }
 
@@ -323,9 +331,7 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
             inputMethodManager.showSoftInput(etChatInput, InputMethodManager.SHOW_IMPLICIT);
         }
         if (v.getId() == R.id.b_chat_send) {
-            //推送消息
-            BaiduPushSender.send(etChatInput.getText().toString());
-            //将消息保存到服务器
+            //推送消息并保存到服务器
             final Context context = v.getContext();
             OkHttpUtils.post().url(Configuration.ws_url + "/location/add")
                     .addParams("longitude", "113.879761")
@@ -424,16 +430,6 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
     @Override
     public void onReceiverNotify(String title, String content) {
 
-    }
-
-    @Override
-    public void onSendSuccess() {
-        Toast.makeText(this, "发送成功", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onSendFailed() {
-        Toast.makeText(this, "发送失败", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -640,6 +636,7 @@ public class ChatActivity extends BasicActivity implements View.OnClickListener,
                 Object obj = msg.obj;
                 System.out.println((String)obj);
                 //处理消息
+                Toast.makeText(ChatActivity.this, (String)obj, Toast.LENGTH_LONG).show();
             }
             if (msg.what == 0x002) {
                 loadData(false);

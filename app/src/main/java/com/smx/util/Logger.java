@@ -8,7 +8,7 @@ import android.util.Log;
  * @author way
  * 
  */
-public class L {
+public class Logger {
 	public static boolean isDebug = true;// 是否需要打印bug，可以在application的onCreate函数里面初始化
 	private static final String TAG = "ais";
 
@@ -33,6 +33,11 @@ public class L {
 			Log.v(TAG, msg);
 	}
 
+	public static void w(String msg) {
+		if (isDebug)
+			Log.w(TAG, msg);
+	}
+
 	// 下面是传入自定义tag的函数
 	public static void i(String tag, String msg) {
 		if (isDebug)
@@ -52,5 +57,10 @@ public class L {
 	public static void v(String tag, String msg) {
 		if (isDebug)
 			Log.i(tag, msg);
+	}
+
+	public static void w(String tag, String msg) {
+		if (isDebug)
+			Log.w(tag, msg);
 	}
 }

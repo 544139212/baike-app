@@ -60,7 +60,7 @@ public class JsonUtil {
 			jsonContent = new JSONObject(content);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return jsonContent;
 	}
@@ -79,7 +79,7 @@ public class JsonUtil {
 					App.getInstance().getSpUtil().getUsername());
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return isMe;
 	}
@@ -97,7 +97,7 @@ public class JsonUtil {
 			userId = jsonContent.getString(USER_ID_KEY);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return userId;
 	}
@@ -109,7 +109,7 @@ public class JsonUtil {
 			channelId = jsonContent.getString(CHANNEL_ID_KEY);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return channelId;
 	}
@@ -121,7 +121,7 @@ public class JsonUtil {
 			nick = jsonContent.getString(USERNAME_KEY);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return nick;
 	}
@@ -133,7 +133,7 @@ public class JsonUtil {
 			userHead = jsonContent.getString(PORTRAIT_KEY);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return userHead;
 	}*/
@@ -145,7 +145,7 @@ public class JsonUtil {
 			message = jsonContent.getString(MESSAGE_KEY);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return message;
 	}
@@ -157,7 +157,7 @@ public class JsonUtil {
 			tag = jsonContent.getString(TAG_KEY);
 		} catch (JSONException e) {
 			// e.printStackTrace();
-			L.e("Parse bind json infos error: " + e);
+			Logger.e("Parse bind json infos error: " + e);
 		}
 		return tag;
 	}
