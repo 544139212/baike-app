@@ -96,7 +96,7 @@ public class MainActivity extends BasicActivity
         ivRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                go(MainActivity.this, MainActivity.class);
+                go(MainActivity.this, RequestActivity.class);
             }
         });
 

@@ -36,6 +36,7 @@ import com.smx.adapter.FaceAdapter;
 import com.smx.adapter.FacePageAdapter;
 import com.smx.dto.DateBillListRespWsDTO;
 import com.smx.dto.MessageListRespWsDTO;
+import com.smx.dto.MessageWsDTO;
 import com.smx.dto.ResultDTO;
 import com.smx.jpush.JPushReceiver;
 import com.smx.receiver.ConnectivityChangeReceiver;
@@ -115,6 +116,8 @@ public class ChatActivity extends BasicActivity
     int currentPage = 0;
 
     String tPhone;
+    List<MessageWsDTO> objects;
+    ChatAdapter chatAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +153,10 @@ public class ChatActivity extends BasicActivity
         tvCenter.setText("与" + tPhone + "聊天中");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
+        objects = new ArrayList<>();
+        chatAdapter = new ChatAdapter(this, objects);
+        listView.setAdapter(chatAdapter);
 
         loadData(false);
 
@@ -192,8 +199,10 @@ public class ChatActivity extends BasicActivity
 
             @Override
             public void onResponse(MessageListRespWsDTO o, int i) {
-                ChatAdapter chatAdapter = new ChatAdapter(context, o.getData());
-                listView.setAdapter(chatAdapter);
+                objects.clear();
+                objects.addAll(o.getData());
+//                ChatAdapter chatAdapter = new ChatAdapter(context, o.getData());
+//                listView.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();
 
                 if (isSwipeRefresh) {
@@ -340,7 +349,7 @@ public class ChatActivity extends BasicActivity
             //推送消息并保存到服务器
             SharedPreferences preferences = getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
             String oPhone = preferences.getString("O_PHONE", "");
-            OkHttpUtils.post().url(Configuration.ws_url + "/message/add")
+            OkHttpUtils.post().url(Configuration.ws_url + "/message/send")
                     .addParams("oPhone", oPhone)
                     .addParams("tPhone", tPhone)
                     .addParams("message", etChatInput.getText().toString())
