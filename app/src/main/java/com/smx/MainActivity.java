@@ -34,6 +34,7 @@ import com.smx.service.LocationService2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
@@ -80,6 +81,8 @@ public class MainActivity extends BasicActivity
 
         ButterKnife.bind(this);
 
+        JPushInterface.init(getApplicationContext());
+
         registerReceivers();
 //        startServices();
 
@@ -93,13 +96,6 @@ public class MainActivity extends BasicActivity
                 }
             }
         });
-        ivRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                go(MainActivity.this, RequestActivity.class);
-            }
-        });
-
 
         tvIndex.setOnClickListener(this);
         tvMessage.setOnClickListener(this);
@@ -108,6 +104,7 @@ public class MainActivity extends BasicActivity
         changeTitle(currentId);
         changeFragment(currentId);
         changeSelect(currentId);
+        changeIvRight(currentId);
 
         //屏蔽默认toolbar(以下2行)
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -146,6 +143,7 @@ public class MainActivity extends BasicActivity
     @Override
     protected void onResume() {
         super.onResume();
+        JPushInterface.resumePush(getApplicationContext());
         getNotificationManager().cancel(0x000);
     }
 
@@ -172,6 +170,7 @@ public class MainActivity extends BasicActivity
                     return;
                 }
 
+                JPushInterface.stopPush(getApplicationContext());
                 showNotification();
                 finish();
             } else {
@@ -261,6 +260,8 @@ public class MainActivity extends BasicActivity
             changeFragment(currentId);
             //改变选中
             changeSelect(currentId);
+            //改变顶部右侧按钮显示及行为
+            changeIvRight(currentId);
         }
     }
 
@@ -335,6 +336,26 @@ public class MainActivity extends BasicActivity
                 break;
             case R.id.rb_profile:
                 tvProfile.setSelected(true);
+                break;
+        }
+    }
+
+    private void changeIvRight(int resId) {
+        ivRight.setVisibility(View.GONE);
+
+        switch (resId) {
+            case R.id.rb_index:
+                break;
+            case R.id.rb_message:
+                ivRight.setVisibility(View.VISIBLE);
+                ivRight.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        go(MainActivity.this, RequestActivity.class);
+                    }
+                });
+                break;
+            case R.id.rb_profile:
                 break;
         }
     }

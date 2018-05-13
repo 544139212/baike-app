@@ -10,6 +10,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
@@ -28,13 +29,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smx.adapter.ChatAdapter;
 import com.smx.adapter.FaceAdapter;
 import com.smx.adapter.FacePageAdapter;
-import com.smx.dto.DateBillListRespWsDTO;
 import com.smx.dto.MessageListRespWsDTO;
 import com.smx.dto.MessageWsDTO;
 import com.smx.dto.ResultDTO;
@@ -53,7 +52,6 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -126,7 +124,8 @@ public class ChatActivity extends BasicActivity
 
         ButterKnife.bind(this);
 
-        JPushInterface.init(getApplicationContext());
+        JPushReceiver.mListeners.add(this);
+        ConnectivityChangeReceiver.mListener = this;
 
         ivLeft.setOnClickListener(this);
         tvNetwork.setOnClickListener(this);
@@ -201,15 +200,12 @@ public class ChatActivity extends BasicActivity
             public void onResponse(MessageListRespWsDTO o, int i) {
                 objects.clear();
                 objects.addAll(o.getData());
-//                ChatAdapter chatAdapter = new ChatAdapter(context, o.getData());
-//                listView.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();
+                listView.setSelection(chatAdapter.getCount());//默认显示位置为最后一条消息处
 
                 if (isSwipeRefresh) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
-
-                listView.setSelection(chatAdapter.getCount());//默认显示位置为最后一条消息处
             }
         });
     }
@@ -222,16 +218,12 @@ public class ChatActivity extends BasicActivity
         } else {
             tvNetwork.setVisibility(View.GONE);
         }
-
-        JPushReceiver.mListener = this;
-        ConnectivityChangeReceiver.mListener = this;
-        JPushInterface.resumePush(getApplicationContext());
     }
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-        JPushInterface.stopPush(getApplicationContext());
+        super.onBackPressed();
+        JPushReceiver.mListeners.remove(this);
         finish();
     }
 
@@ -347,9 +339,11 @@ public class ChatActivity extends BasicActivity
         }
         if (v.getId() == R.id.b_chat_send) {
             //推送消息并保存到服务器
-            SharedPreferences preferences = getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
+            final Context context = this;
+            SharedPreferences preferences = context.getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
             String oPhone = preferences.getString("O_PHONE", "");
             OkHttpUtils.post().url(Configuration.ws_url + "/message/send")
+                    .addParams("type", "02")
                     .addParams("oPhone", oPhone)
                     .addParams("tPhone", tPhone)
                     .addParams("message", etChatInput.getText().toString())
@@ -369,7 +363,12 @@ public class ChatActivity extends BasicActivity
                     if (o.getCode() == 200) {
                         // 成功
                         etChatInput.setText("");//清空输入框
+
                         loadData(false);
+
+                        // 广播机制通信
+                        Intent intent = new Intent(context.getPackageName() + ".action.REFRESH");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     }
                 }
             });
@@ -418,20 +417,10 @@ public class ChatActivity extends BasicActivity
     }
 
     @Override
-    public void onBind(String method, int errorCode, String content) {
-        Toast.makeText(this, content, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void onReceiverMessage(String message) {
         Message handlerMsg = handler.obtainMessage(0x001);
         handlerMsg.obj = message;
         handler.sendMessage(handlerMsg);
-    }
-
-    @Override
-    public void onReceiverNotify(String title, String content) {
-
     }
 
     @Override
@@ -638,7 +627,6 @@ public class ChatActivity extends BasicActivity
             if (msg.what == 0x001) {
                 // 已收到消息内容
 //                Object obj = msg.obj;
-//                Toast.makeText(ChatActivity.this, (String)obj, Toast.LENGTH_LONG).show();
 
                 loadData(false);
             }

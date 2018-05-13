@@ -11,7 +11,9 @@ import com.smx.util.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -113,8 +115,6 @@ public class JPushReceiver extends BroadcastReceiver {
 		String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 		String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
 
-		mListener.onReceiverMessage(message);
-
 		/*if (MainActivity.isForeground) {
 			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 			String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
@@ -133,13 +133,20 @@ public class JPushReceiver extends BroadcastReceiver {
 			}
 			LocalBroadcastManager.getInstance(context).sendBroadcast(msgIntent);
 		}*/
+
+
+
+
+		if (mListeners != null && !mListeners.isEmpty()) {
+			for (OnReceiverListener mListener : mListeners) {
+				mListener.onReceiverMessage(message);
+			}
+		}
 	}
 
-	public static OnReceiverListener mListener;
+	public static List<OnReceiverListener> mListeners = new ArrayList<>();
 
 	public interface OnReceiverListener {
-		void onBind(String method, int errorCode, String content);
 		void onReceiverMessage(String message);
-		void onReceiverNotify(String title, String content);
 	}
 }

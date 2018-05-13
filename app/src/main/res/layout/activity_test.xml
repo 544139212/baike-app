@@ -9,34 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/edtUserName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:drawableLeft="@mipmap/search"
-                android:drawablePadding="10dp"
-                android:background="@drawable/button_background_4"
-                android:maxLength="32"
-                android:hint="请输入联系人账号"
-                android:textSize="14sp"
-                android:textColor="#ff545454" />
 
-            <Button
-                android:id="@+id/btnSearch"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:layout_margin="15dp"
-                android:background="@drawable/button_background_3"
-                android:text="查找"
-                android:textSize="18sp"
-                android:textColor="#ff000000"/>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
