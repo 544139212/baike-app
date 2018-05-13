@@ -197,6 +197,8 @@ public class LocationService extends Service {
             public void onResponse(ResultDTO o, int i) {
                 if (o.getCode() == 200) {
 
+                } else {
+
                 }
             }
         });

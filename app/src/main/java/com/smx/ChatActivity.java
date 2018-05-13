@@ -29,6 +29,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smx.adapter.ChatAdapter;
@@ -369,6 +370,8 @@ public class ChatActivity extends BasicActivity
                         // 广播机制通信
                         Intent intent = new Intent(context.getPackageName() + ".action.REFRESH");
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    } else {
+                        Toast.makeText(ChatActivity.this, o.getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

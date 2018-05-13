@@ -89,6 +89,8 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
                         editor.commit();
 
                         goAndFinish(LoginActivity.this, MainActivity.class);
+                    } else {
+                        Toast.makeText(LoginActivity.this, o.getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -88,6 +88,8 @@ public class CreateActivity extends BasicActivity implements View.OnClickListene
                 public void onResponse(ResultDTO o, int i) {
                     if (o.getCode() == 200) {
                         finish();
+                    } else {
+                        Toast.makeText(CreateActivity.this, o.getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

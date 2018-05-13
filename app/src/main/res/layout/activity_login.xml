@@ -39,7 +39,6 @@
             android:drawableLeft="@mipmap/acc_account"
             android:drawableBottom="@drawable/edit_text_shape"
             android:drawablePadding="10dp"
-            android:inputType="text"
             android:maxLength="16"
             android:hint="手机号"
             style="@style/H3_2"/>
