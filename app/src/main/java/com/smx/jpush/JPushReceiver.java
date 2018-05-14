@@ -189,7 +189,7 @@ public class JPushReceiver extends BroadcastReceiver {
 		Notification mNotification = new NotificationCompat.Builder(context)
 				.setSmallIcon(R.mipmap.ic_logo)
 				.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.logo))
-				.setTicker("新消息")
+				.setTicker(message)
 				.setContentTitle(context.getString(R.string.app_name))
 				.setContentText(message)
 				.setWhen(System.currentTimeMillis())
