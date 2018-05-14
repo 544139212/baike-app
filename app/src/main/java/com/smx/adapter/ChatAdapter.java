@@ -140,6 +140,13 @@ public class ChatAdapter extends BaseAdapter {
         return 3;
     }
 
+
+    @Override
+    public boolean isEnabled(int position) {
+//        return super.isEnabled(position);
+        return false;
+    }
+
     public class MsgViewHolder {
         @BindView(R.id.civ_avator)
         ImageView civAvator;

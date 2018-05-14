@@ -32,7 +32,7 @@
             android:theme="@style/AppTheme.NoTotitleBar" />
         <activity
             android:name=".ChatActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".TestActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".CreateActivity" />

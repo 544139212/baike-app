@@ -29,7 +29,8 @@
             android:id="@+id/lv_chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"/>
+            android:divider="@null"
+            android:transcriptMode="alwaysScroll"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout

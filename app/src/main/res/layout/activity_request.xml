@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/search_selector"
-            android:queryHint="请输入搜索内容"/>
+            android:iconifiedByDefault="false"
+            android:queryHint="请输入联系人手机号"/>
 
         <!-- 此处可以添加 可能认识的人 GridView -->
     </LinearLayout>
