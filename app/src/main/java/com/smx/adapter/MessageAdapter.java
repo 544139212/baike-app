@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.smx.ChatActivity;
 import com.smx.R;
 import com.smx.dto.MessageWsDTO;
+import com.smx.util.FaceUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class MessageAdapter extends ArrayAdapter<MessageWsDTO> {
         try {
             Picasso.with(convertView.getContext()).load("https://unsplash.it/400/800/?random").into(newsViewHolder.ivMessageImg);
             newsViewHolder.tvMessagePublisher.setText(objects.get(position).gettPhone());
-            newsViewHolder.tvMessageTitle.setText(objects.get(position).getMessage());
+            newsViewHolder.tvMessageTitle.setText(FaceUtil.convertNormalStringToSpannableString(context, 30, 30, objects.get(position).getMessage()));
             newsViewHolder.tvMessageDate.setText(objects.get(position).getDate());
         } catch (Exception e) {
             // TODO: handle exception

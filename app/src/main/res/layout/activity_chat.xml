@@ -38,12 +38,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/border_top_shape">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/half_fab_margin">
             <LinearLayout
                 android:id="@+id/left_side"
                 android:layout_width="wrap_content"
@@ -55,8 +56,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@mipmap/chat_voice"
-                    android:scaleType="centerCrop"
-                    android:background="@color/pink_F4CCD5"/>
+                    android:scaleType="centerCrop"/>
                 <ImageView
                     android:id="@+id/iv_chat_keyboard_left"
                     android:layout_width="35dp"
@@ -64,7 +64,6 @@
                     android:layout_marginLeft="5dp"
                     android:src="@mipmap/chat_keyboard"
                     android:scaleType="centerCrop"
-                    android:background="@color/pink_F4CCD5"
                     android:visibility="gone"/>
             </LinearLayout>
             <LinearLayout
@@ -90,9 +89,9 @@
                     android:layout_height="match_parent"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:background="@color/pink_FF8894"
+                    android:background="@android:color/white"
                     android:text="按住说话"
-                    android:textColor="@color/white_FFFFFF"
+                    android:textColor="@android:color/darker_gray"
                     android:visibility="gone"/>
             </LinearLayout>
             <LinearLayout
@@ -106,15 +105,13 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@mipmap/chat_smile"
-                    android:scaleType="centerCrop"
-                    android:background="@color/pink_F4CCD5"/>
+                    android:scaleType="centerCrop"/>
                 <ImageView
                     android:id="@+id/iv_chat_keyboard_right"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@mipmap/chat_keyboard"
                     android:scaleType="centerCrop"
-                    android:background="@color/pink_F4CCD5"
                     android:visibility="gone"/>
                 <ImageView
                     android:id="@+id/iv_chat_plus"
@@ -122,35 +119,31 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
                     android:src="@mipmap/chat_plus"
-                    android:scaleType="centerCrop"
-                    android:background="@color/pink_F4CCD5"/>
+                    android:scaleType="centerCrop"/>
                 <Button
                     android:id="@+id/b_chat_send"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
-                     android:background="@color/pink_FF8894"
+                    android:background="@drawable/button_selector"
                     android:text="发送"
-                    android:textColor="@color/white_FFFFFF"
+                    android:textColor="@android:color/white"
                     android:visibility="gone"/>
             </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
             <android.support.v4.view.ViewPager
                 android:id="@+id/layout_smile"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:visibility="gone"/>
-            <TextView
+            <android.support.v4.view.ViewPager
                 android:id="@+id/layout_plus"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:text="plus区域"
-                android:gravity="center"
                 android:visibility="gone"/>
         </RelativeLayout>
     </LinearLayout>

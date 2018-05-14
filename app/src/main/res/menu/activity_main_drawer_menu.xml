@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_photo"
-            android:icon="@mipmap/acc_account"
+            android:icon="@mipmap/ic_launcher"
             android:title="个人资料" />
     </group>
 

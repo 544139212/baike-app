@@ -11,10 +11,10 @@ import java.util.List;
  * Created by vivo on 2017/10/4.
  */
 
-public class FacePageAdapter extends PagerAdapter {
+public class ChatPageAdapter extends PagerAdapter {
 
     List<GridView> views;
-    public FacePageAdapter(List<GridView> views) {
+    public ChatPageAdapter(List<GridView> views) {
         this.views = views;
     }
 

@@ -2,14 +2,8 @@ package com.smx.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.smx.App;
 import com.smx.R;
-import com.smx.dto.DateBillWsDTO;
 import com.smx.dto.MessageWsDTO;
-import com.smx.util.RandomStringUtil;
+import com.smx.util.FaceUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +53,7 @@ public class ChatAdapter extends BaseAdapter {
             }
             try {
                 Picasso.with(convertView.getContext()).load("https://unsplash.it/400/800/?random").into(newsViewHolder.civAvator);
-                newsViewHolder.tvMessage.setText(convertNormalStringToSpannableString(objects.get(position).getMessage()));
+                newsViewHolder.tvMessage.setText(FaceUtil.convertNormalStringToSpannableString(context, 50, 50, objects.get(position).getMessage()));
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
@@ -78,7 +68,7 @@ public class ChatAdapter extends BaseAdapter {
                 newsViewHolder = (MsgViewHolder) convertView.getTag();
             }
             try {
-                newsViewHolder.tvMessage.setText(convertNormalStringToSpannableString(objects.get(position).getMessage()));
+                newsViewHolder.tvMessage.setText(FaceUtil.convertNormalStringToSpannableString(context, 50, 50, objects.get(position).getMessage()));
                 Picasso.with(convertView.getContext())
                         .load("https://unsplash.it/400/800/?random")
                         .into(newsViewHolder.civAvator);
@@ -165,90 +155,6 @@ public class ChatAdapter extends BaseAdapter {
         public DateViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
-    }
-
-    public static final Pattern EMOTION_URL = Pattern.compile("\\[(\\S+?)\\]");
-
-    private CharSequence convertNormalStringToSpannableString(String message) {
-        // TODO Auto-generated method stub
-        String hackTxt;
-        if (message.startsWith("[") && message.endsWith("]")) {
-            hackTxt = message + " ";
-        } else {
-            hackTxt = message;
-        }
-        SpannableString value = SpannableString.valueOf(hackTxt);
-
-        Matcher localMatcher = EMOTION_URL.matcher(value);
-        while (localMatcher.find()) {
-            String str2 = localMatcher.group(0);
-            int k = localMatcher.start();
-            int m = localMatcher.end();
-            // k = str2.lastIndexOf("[");
-            // Log.i("way", "str2.length = "+str2.length()+", k = " + k);
-            // str2 = str2.substring(k, m);
-            if (m - k < 8) {
-                if (true) {//map中包含str2这个key
-                    int face = R.mipmap.ic_launcher_round;
-                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), face);
-                    if (bitmap != null) {
-                        ImageSpan localImageSpan = new ImageSpan(context, bitmap, ImageSpan.ALIGN_BASELINE);
-                        value.setSpan(localImageSpan, k, m, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    }
-                }
-            }
-        }
-        return value;
-    }
-
-    //解析表情
-    private CharSequence convertNormalStringToSpannableString2(String message) {
-        // TODO Auto-generated method stub
-        String hackTxt;
-        if (message.startsWith("[") && message.endsWith("]")) {
-            hackTxt = message + " ";
-        } else {
-            hackTxt = message;
-        }
-        SpannableString value = SpannableString.valueOf(hackTxt);
-
-        Matcher localMatcher = EMOTION_URL.matcher(value);
-        while (localMatcher.find()) {
-            String str2 = localMatcher.group(0);
-            int k = localMatcher.start();
-            int m = localMatcher.end();
-            // k = str2.lastIndexOf("[");
-            // Log.i("way", "str2.length = "+str2.length()+", k = " + k);
-            // str2 = str2.substring(k, m);
-            if (m - k < 8) {
-                if (true) {//map中包含str2这个key
-                    int face = R.mipmap.ic_launcher_round;
-                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), face);
-                    if (bitmap != null) {
-                        int rawHeigh = bitmap.getHeight();
-                        int rawWidth = bitmap.getHeight();
-                        int newHeight = 30;
-                        int newWidth = 30;
-                        // 计算缩放因子
-                        float heightScale = ((float) newHeight) / rawHeigh;
-                        float widthScale = ((float) newWidth) / rawWidth;
-                        // 新建立矩阵
-                        Matrix matrix = new Matrix();
-                        matrix.postScale(heightScale, widthScale);
-                        // 设置图片的旋转角度
-                        // matrix.postRotate(-30);
-                        // 设置图片的倾斜
-                        // matrix.postSkew(0.1f, 0.1f);
-                        // 将图片大小压缩
-                        // 压缩后图片的宽和高以及kB大小均会变化
-                        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, rawWidth, rawHeigh, matrix, true);
-                        ImageSpan localImageSpan = new ImageSpan(context, newBitmap, ImageSpan.ALIGN_BASELINE);
-                        value.setSpan(localImageSpan, k, m, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    }
-                }
-            }
-        }
-        return value;
     }
 
 }

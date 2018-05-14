@@ -538,7 +538,7 @@
                             android:gravity="bottom"
                             android:text="小沈阳"
                             android:textSize="18sp"
-                            android:textColor="@color/white_FFFFFF"/>
+                            android:textColor="@android:color/white"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -550,7 +550,7 @@
                             android:focusable="true"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:text="人生得意须尽欢，莫使金樽空对月, 人生得意须尽欢，莫使金樽空对月"
-                            android:textColor="@color/white_FFFFFF"/>
+                            android:textColor="@android:color/white"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -569,12 +569,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="上次登录"
-                            android:textColor="@color/white_FFFFFF"/>
+                            android:textColor="@android:color/white"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="2015-03-24 19:37:45"
-                            android:textColor="@color/white_FFFFFF"/>
+                            android:textColor="@android:color/white"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -586,12 +586,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="参考地点"
-                            android:textColor="@color/white_FFFFFF"/>
+                            android:textColor="@android:color/white"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="中国广东省深圳市罗湖区"
-                            android:textColor="@color/white_FFFFFF"/>
+                            android:textColor="@android:color/white"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
