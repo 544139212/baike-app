@@ -83,7 +83,7 @@ public class RequestActivity extends BasicActivity implements View.OnClickListen
             TextView textView = (TextView) searchView.findViewById(textId);
             textView.clearFocus();
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            textView.setTextColor(getResources().getColor(R.color.textColor));
             textView.setHintTextColor(getResources().getColor(android.R.color.darker_gray));
             android.widget.LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) textView.getLayoutParams();
             layoutParams.gravity = Gravity.CENTER_VERTICAL;
