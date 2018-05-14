@@ -1,15 +1,12 @@
 package com.smx;
 
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -19,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -171,13 +167,11 @@ public class MainActivity extends BasicActivity
                 }
 
                 JPushInterface.stopPush(getApplicationContext());
-                showNotification();
                 finish();
             } else {
                 firstTime = System.currentTimeMillis();
                 if (App.getInstance().getSpUtil().getMsgNotify()) {
                     Toast.makeText(this, "再按一次应用程序转入后台运行", Toast.LENGTH_LONG).show();
-                    showNotification();
                 } else {
                     Toast.makeText(this, "再按一次应用程序退出不再运行", Toast.LENGTH_SHORT).show();
                 }
@@ -388,39 +382,4 @@ public class MainActivity extends BasicActivity
         startService(service);
     }
 
-    /**
-     * 创建挂机图标
-     */
-    private void showNotification() {
-        if (!App.getInstance().getSpUtil().getMsgNotify())// 如果用户设置不显示挂机图标，直接返回
-            return;
-        int icon = R.mipmap.ic_launcher_round;
-        CharSequence tickerText = getResources().getString(R.string.app_is_run_background);
-        long when = System.currentTimeMillis();
-//
-//		mNotification = new Notification(icon, tickerText, when);
-
-        Notification mNotification = new NotificationCompat.Builder(this)
-                .setSmallIcon(icon)
-                .setTicker(tickerText)
-                .setWhen(when)
-                .build();
-
-        // 放置在"正在运行"栏目中
-        mNotification.flags = Notification.FLAG_ONGOING_EVENT;
-
-        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.notify_status_bar_latest_event_view);
-//		contentView.setImageViewResource(R.id.icon, heads[mSpUtil.getHeadIcon()]);
-        contentView.setTextViewText(R.id.title, "内容");
-        contentView.setTextViewText(R.id.text, tickerText);
-        contentView.setLong(R.id.time, "setTime", when);
-        // 指定个性化视图
-        mNotification.contentView = contentView;
-
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // 指定内容意图
-        mNotification.contentIntent = contentIntent;
-        getNotificationManager().notify(0x000, mNotification);
-    }
 }
