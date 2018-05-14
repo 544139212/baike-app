@@ -144,7 +144,7 @@
 
     <style name="GuideButtonStyle">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/pink_F4CCD5</item>
+        <item name="android:textColor">@color/white_FFFFFF</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/button_shape</item>
     </style>

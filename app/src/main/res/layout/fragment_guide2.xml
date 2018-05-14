@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/splash"
+        android:src="@mipmap/guide_2"
         android:scaleType="centerCrop"
         android:background="@color/blue_F0F8ff"/>
 

@@ -60,6 +60,11 @@ public class GuideActivity extends BasicActivity implements RadioGroup.OnChecked
     public void onPageSelected(int i) {
         int id = radioGroup.getChildAt(i).getId();
         radioGroup.check(id);
+
+        button.setVisibility(View.GONE);
+        if (i == radioGroup.getChildCount() - 1) {
+            button.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
