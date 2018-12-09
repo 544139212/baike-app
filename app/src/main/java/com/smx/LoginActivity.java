@@ -109,7 +109,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
                 }
             } while (TextUtils.isEmpty(regId));
 
-            OkHttpUtils.post().url(Configuration.ws_url + "/user/add")
+            /*OkHttpUtils.post().url(Configuration.ws_url + "/user/add")
                     .addParams("phone", phone)
                     .addParams("password", password)
                     .addParams("regId", regId)
@@ -126,7 +126,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
 
                 @Override
                 public void onResponse(ResultDTO o, int i) {
-                    if (o.getCode() == 200) {
+                    if (o.getCode() == 200) {*/
                         // 成功
                         SharedPreferences preferences = getSharedPreferences("CURRENT_USER", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
@@ -134,11 +134,11 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
                         editor.commit();
 
                         goAndFinish(LoginActivity.this, MainActivity.class);
-                    } else {
+                    /*} else {
                         Toast.makeText(LoginActivity.this, o.getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
-            });
+            });*/
         }
     }
 
